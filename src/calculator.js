@@ -53,6 +53,27 @@ function divide(a, b) {
   return a / b;
 }
 
+// Modulo: returns the remainder of a divided by b
+function modulo(a, b) {
+  if (b === 0) {
+    throw new Error("Cannot divide by zero");
+  }
+  return a % b;
+}
+
+// Power: returns base raised to the exponent
+function power(base, exponent) {
+  return Math.pow(base, exponent);
+}
+
+// Square Root: returns the square root of n, with error handling for negatives
+function squareRoot(n) {
+  if (n < 0) {
+    throw new Error("Cannot calculate square root of a negative number");
+  }
+  return Math.sqrt(n);
+}
+
 function calculate(num1, operator, num2) {
   switch (operator) {
     case "+":
@@ -63,8 +84,14 @@ function calculate(num1, operator, num2) {
       return multiply(num1, num2);
     case "/":
       return divide(num1, num2);
+    case "%":
+      return modulo(num1, num2);
+    case "**":
+      return power(num1, num2);
+    case "sqrt":
+      return squareRoot(num1);
     default:
-      throw new Error(`Invalid operator: "${operator}". Use +, -, *, or /`);
+      throw new Error(`Invalid operator: "${operator}". Use +, -, *, /, %, **, or sqrt`);
   }
 }
 
@@ -74,7 +101,9 @@ async function main() {
   console.log("===================================");
   console.log("  Node.js CLI Calculator");
   console.log("  Supports: + (add), - (subtract),");
-  console.log("            * (multiply), / (divide)");
+  console.log("            * (multiply), / (divide),");
+  console.log("            % (modulo), ** (power),");
+  console.log("            sqrt (square root)");
   console.log("===================================\n");
 
   let running = true;
@@ -115,7 +144,7 @@ async function main() {
 }
 
 // Export functions for testing
-module.exports = { add, subtract, multiply, divide, calculate };
+module.exports = { add, subtract, multiply, divide, modulo, power, squareRoot, calculate };
 
 // Run the CLI only when executed directly
 if (require.main === module) {
